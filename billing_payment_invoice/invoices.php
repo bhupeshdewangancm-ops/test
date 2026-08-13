@@ -1,310 +1,350 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Invoices</title>
+<?php
+$pageTitle = 'Invoices';
+include '../includes/header.php';
+include '../includes/sidebar.php';
+?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background: #f5f7fb;
-        }
-
-        .page-card,
-        .summary-card {
-            border: 0;
-            border-radius: 12px;
-        }
-
-        .table th {
-            white-space: nowrap;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container-fluid py-4">
-
-    <div class="mb-4">
-        <h4 class="mb-1">Member Invoices</h4>
-        <small class="text-muted">
-            Manage membership invoices and pending dues
-        </small>
+<div class="main-content">
+    <div class="topbar">
+        <div>
+            <div class="topbar-title">Invoices</div>
+            <small class="text-muted">Manage member invoices and outstanding dues</small>
+        </div>
+        <div class="admin-profile">
+            <div class="admin-avatar">A</div>
+            <div class="admin-info">
+                <strong>Admin</strong>
+                <small>Gym Administrator</small>
+            </div>
+        </div>
     </div>
 
-    <!-- Summary -->
+    <div class="content-area">
+        <div class="page-header">
+            <div>
+                <h2>Invoices</h2>
+                <p>View, search and manage gym member invoices.</p>
+            </div>
+            <a href="<?= $baseUrl ?>/billing_payment_invoice/receive-payment.php" class="btn btn-primary">
+                <i class="fa-solid fa-money-bill-wave me-1"></i>
+                Receive Payment
+            </a>
+        </div>
 
-    <div class="row g-3 mb-4">
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-file-invoice"></i>
+                </div>
+                <div>
+                    <span>Total Invoices</span>
+                    <strong>128</strong>
+                </div>
+            </div>
 
-        <div class="col-md-3">
-            <div class="card summary-card shadow-sm">
-                <div class="card-body">
-                    <small class="text-muted">Total Invoices</small>
-                    <h4 class="mb-0">4</h4>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <span>Paid</span>
+                    <strong>92</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                    <span>Partial</span>
+                    <strong>18</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon red">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <span>Due Amount</span>
+                    <strong>₹48,500</strong>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card summary-card shadow-sm">
-                <div class="card-body">
-                    <small class="text-muted">Total Amount</small>
-                    <h4 class="mb-0">₹33,000.00</h4>
+        <div class="table-card">
+            <div class="table-header">
+                <div>
+                    <h5>Invoice List</h5>
+                    <small>All generated invoices</small>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card summary-card shadow-sm">
-                <div class="card-body">
-                    <small class="text-muted">Total Paid</small>
-                    <h4 class="mb-0 text-success">₹19,000.00</h4>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card summary-card shadow-sm">
-                <div class="card-body">
-                    <small class="text-muted">Total Due</small>
-                    <h4 class="mb-0 text-danger">₹14,000.00</h4>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Filters -->
-
-    <div class="card page-card shadow-sm">
-
-        <div class="card-body">
-
-            <div class="row g-2 mb-3">
-
-                <div class="col-md-4">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Search Invoice / Member">
-                </div>
-
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option>All Status</option>
-                        <option>Unpaid</option>
-                        <option>Partial</option>
-                        <option>Paid</option>
-                    </select>
-                </div>
-
-                <div class="col-md-2">
-                    <button class="btn btn-primary w-100">
-                        Search
+                <div class="header-actions">
+                    <button class="btn btn-outline-secondary btn-sm">
+                        <i class="fa-solid fa-download me-1"></i>
+                        Export
                     </button>
                 </div>
+            </div>
 
+            <div class="filter-box">
+                <div class="row g-3">
+                    <div class="col-lg-3">
+                        <label>Search</label>
+                        <input type="text" class="form-control" placeholder="Invoice no / member">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <label>Status</label>
+                        <select class="form-select">
+                            <option>All Status</option>
+                            <option>Paid</option>
+                            <option>Partial</option>
+                            <option>Unpaid</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <label>From Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <label>To Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <label>Branch</label>
+                        <select class="form-select">
+                            <option>All Branches</option>
+                            <option>Raipur Main Branch</option>
+                            <option>Bilaspur Branch</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-1 d-flex align-items-end">
+                        <button class="btn btn-primary w-100">
+                            <i class="fa-solid fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="table-responsive">
-
-                <table class="table table-hover align-middle">
-
-                    <thead class="table-light">
-                    <tr>
-                        <th>Invoice No.</th>
-                        <th>Member</th>
-                        <th>Invoice Date</th>
-                        <th>Due Date</th>
-                        <th class="text-end">Amount</th>
-                        <th class="text-end">Paid</th>
-                        <th class="text-end">Due</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
+                <table class="table invoice-table align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Invoice No</th>
+                            <th>Member</th>
+                            <th>Invoice Date</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>Due</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
 
                     <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <strong>INV-001</strong>
+                            </td>
+                            <td>
+                                <strong>Rohan Active Member</strong>
+                                <small>GYM-101</small>
+                            </td>
+                            <td>07 Aug 2026</td>
+                            <td>₹1,500.00</td>
+                            <td class="text-success">₹1,500.00</td>
+                            <td>₹0.00</td>
+                            <td>07 Aug 2026</td>
+                            <td>
+                                <span class="status paid">Paid</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/invoice-details.php"
+                                       class="btn btn-sm btn-outline-primary"
+                                       title="View">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
 
-                    <!-- PARTIAL -->
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/payment-receipt.php"
+                                       class="btn btn-sm btn-outline-success"
+                                       title="Receipt">
+                                        <i class="fa-solid fa-receipt"></i>
+                                    </a>
 
-                    <tr>
-                        <td>
-                            <strong>INV-000001</strong>
-                        </td>
+                                    <button class="btn btn-sm btn-outline-secondary" title="Print">
+                                        <i class="fa-solid fa-print"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
 
-                        <td>Arjun Rathore</td>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <strong>INV-002</strong>
+                            </td>
+                            <td>
+                                <strong>Amit Sharma</strong>
+                                <small>GYM-102</small>
+                            </td>
+                            <td>28 Jul 2026</td>
+                            <td>₹12,000.00</td>
+                            <td class="text-success">₹2,000.00</td>
+                            <td class="text-danger">₹10,000.00</td>
+                            <td>04 Aug 2026</td>
+                            <td>
+                                <span class="status partial">Partial</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/invoice-details.php"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
 
-                        <td>05 Aug 2026</td>
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/receive-payment.php"
+                                       class="btn btn-sm btn-outline-success">
+                                        <i class="fa-solid fa-money-bill"></i>
+                                    </a>
 
-                        <td>05 Sep 2026</td>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-print"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
 
-                        <td class="text-end">
-                            ₹11,000.00
-                        </td>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <strong>INV-003</strong>
+                            </td>
+                            <td>
+                                <strong>Priya Verma</strong>
+                                <small>GYM-103</small>
+                            </td>
+                            <td>01 Aug 2026</td>
+                            <td>₹2,500.00</td>
+                            <td>₹0.00</td>
+                            <td class="text-danger">₹2,500.00</td>
+                            <td>08 Aug 2026</td>
+                            <td>
+                                <span class="status unpaid">Unpaid</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/invoice-details.php"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
 
-                        <td class="text-end text-success">
-                            ₹4,000.00
-                        </td>
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/receive-payment.php"
+                                       class="btn btn-sm btn-outline-success">
+                                        <i class="fa-solid fa-money-bill"></i>
+                                    </a>
 
-                        <td class="text-end text-danger">
-                            ₹7,000.00
-                        </td>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-print"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
 
-                        <td>
-                            <span class="badge bg-warning text-dark">
-                                Partial
-                            </span>
-                        </td>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <strong>INV-004</strong>
+                            </td>
+                            <td>
+                                <strong>Suresh Kumar</strong>
+                                <small>GYM-104</small>
+                            </td>
+                            <td>05 Aug 2026</td>
+                            <td>₹3,000.00</td>
+                            <td class="text-success">₹3,000.00</td>
+                            <td>₹0.00</td>
+                            <td>05 Aug 2026</td>
+                            <td>
+                                <span class="status paid">Paid</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/invoice-details.php"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
 
-                        <td>
-                            <a href="invoice-details.php"
-                               class="btn btn-sm btn-outline-primary">
-                                View
-                            </a>
+                                    <a href="<?= $baseUrl ?>/billing_payment_invoice/payment-receipt.php"
+                                       class="btn btn-sm btn-outline-success">
+                                        <i class="fa-solid fa-receipt"></i>
+                                    </a>
 
-                            <a href="receive-payment.php"
-                               class="btn btn-sm btn-success">
-                                Receive Payment
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- PAID -->
-
-                    <tr>
-                        <td>
-                            <strong>INV-000002</strong>
-                        </td>
-
-                        <td>Rahul Sharma</td>
-
-                        <td>04 Aug 2026</td>
-
-                        <td>04 Sep 2026</td>
-
-                        <td class="text-end">
-                            ₹10,000.00
-                        </td>
-
-                        <td class="text-end text-success">
-                            ₹10,000.00
-                        </td>
-
-                        <td class="text-end">
-                            ₹0.00
-                        </td>
-
-                        <td>
-                            <span class="badge bg-success">
-                                Paid
-                            </span>
-                        </td>
-
-                        <td>
-                            <a href="invoice-details.php"
-                               class="btn btn-sm btn-outline-primary">
-                                View
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- UNPAID -->
-
-                    <tr>
-                        <td>
-                            <strong>INV-000003</strong>
-                        </td>
-
-                        <td>Aman Verma</td>
-
-                        <td>03 Aug 2026</td>
-
-                        <td>03 Sep 2026</td>
-
-                        <td class="text-end">
-                            ₹8,000.00
-                        </td>
-
-                        <td class="text-end">
-                            ₹0.00
-                        </td>
-
-                        <td class="text-end text-danger">
-                            ₹8,000.00
-                        </td>
-
-                        <td>
-                            <span class="badge bg-danger">
-                                Unpaid
-                            </span>
-                        </td>
-
-                        <td>
-                            <a href="invoice-details.php"
-                               class="btn btn-sm btn-outline-primary">
-                                View
-                            </a>
-
-                            <a href="receive-payment.php"
-                               class="btn btn-sm btn-success">
-                                Receive Payment
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- PARTIAL -->
-
-                    <tr>
-                        <td>
-                            <strong>INV-000004</strong>
-                        </td>
-
-                        <td>Vikas Sahu</td>
-
-                        <td>01 Aug 2026</td>
-
-                        <td>01 Sep 2026</td>
-
-                        <td class="text-end">
-                            ₹4,000.00
-                        </td>
-
-                        <td class="text-end text-success">
-                            ₹5,000.00
-                        </td>
-
-                        <td class="text-end text-danger">
-                            ₹-1,000.00
-                        </td>
-
-                        <td>
-                            <span class="badge bg-secondary">
-                                Example
-                            </span>
-                        </td>
-
-                        <td>
-                            <a href="invoice-details.php"
-                               class="btn btn-sm btn-outline-primary">
-                                View
-                            </a>
-                        </td>
-                    </tr>
-
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-print"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
-
                 </table>
-
             </div>
 
+            <div class="pagination-box">
+                <span>Showing 1 to 4 of 128 invoices</span>
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary">Previous</button>
+                    <button class="btn btn-sm btn-primary">1</button>
+                    <button class="btn btn-sm btn-outline-secondary">2</button>
+                    <button class="btn btn-sm btn-outline-secondary">3</button>
+                    <button class="btn btn-sm btn-outline-secondary">Next</button>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </div>
 
-</body>
-</html>
+<style>
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:15px}
+.page-header h2{margin:0;font-size:24px;font-weight:700}
+.page-header p{margin:5px 0 0;color:#6b7280}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stat-card{background:#fff;border-radius:12px;padding:18px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.stat-icon{width:45px;height:45px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.stat-icon.blue{background:#eff6ff;color:#2563eb}
+.stat-icon.green{background:#ecfdf5;color:#16a34a}
+.stat-icon.orange{background:#fff7ed;color:#ea580c}
+.stat-icon.red{background:#fef2f2;color:#dc2626}
+.stat-card span{display:block;font-size:11px;color:#6b7280}
+.stat-card strong{display:block;font-size:20px;margin-top:3px}
+.table-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.table-header{padding:20px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb}
+.table-header h5{margin:0;font-size:16px}
+.table-header small{color:#6b7280}
+.filter-box{padding:20px 25px;background:#f8fafc;border-bottom:1px solid #e5e7eb}
+.filter-box label{display:block;font-size:11px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control,.form-select{font-size:13px;min-height:40px}
+.invoice-table{margin:0}
+.invoice-table th{font-size:11px;color:#6b7280;background:#f8fafc;white-space:nowrap}
+.invoice-table td{font-size:12px;white-space:nowrap}
+.invoice-table td small{display:block;color:#6b7280;font-size:10px;margin-top:3px}
+.status{padding:5px 9px;border-radius:20px;font-size:10px;font-weight:600}
+.status.paid{background:#dcfce7;color:#15803d}
+.status.partial{background:#fef3c7;color:#b45309}
+.status.unpaid{background:#fee2e2;color:#b91c1c}
+.action-buttons{display:flex;gap:5px}
+.pagination-box{padding:15px 20px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#6b7280;border-top:1px solid #e5e7eb}
+.pagination-box div{display:flex;gap:5px}
+@media(max-width:900px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr}.page-header{flex-direction:column;align-items:flex-start}.pagination-box{flex-direction:column;gap:10px}}
+</style>
+
+<?php include '../includes/footer.php'; ?>

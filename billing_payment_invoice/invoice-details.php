@@ -1,242 +1,185 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice Details</title>
+<?php
+$pageTitle = 'Invoice Details';
+include '../includes/header.php';
+include '../includes/sidebar.php';
+?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background: #f5f7fb;
-        }
-
-        .main-card {
-            border: 0;
-            border-radius: 12px;
-        }
-
-        .amount-box {
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 18px;
-            height: 100%;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container-fluid py-4">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
+<div class="main-content">
+    <div class="topbar">
         <div>
-            <h4 class="mb-1">Invoice Details</h4>
-            <small class="text-muted">Complete billing information</small>
+            <div class="topbar-title">Invoice Details</div>
+            <small class="text-muted">View complete invoice information</small>
         </div>
-
-        <div>
-            <a href="invoices.php"
-               class="btn btn-outline-secondary">
-                Back
-            </a>
-
-            <a href="receive-payment.php"
-               class="btn btn-success">
-                Receive Payment
-            </a>
+        <div class="admin-profile">
+            <div class="admin-avatar">A</div>
+            <div class="admin-info">
+                <strong>Admin</strong>
+                <small>Gym Administrator</small>
+            </div>
         </div>
-
     </div>
 
-    <div class="card main-card shadow-sm mb-4">
+    <div class="content-area">
+        <div class="page-header">
+            <div>
+                <h2>Invoice #INV-001</h2>
+                <p>Invoice details and payment information.</p>
+            </div>
+            <div class="header-buttons">
+                <a href="<?= $baseUrl ?>/billing_payment_invoice/invoices.php" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-arrow-left me-1"></i>
+                    Back
+                </a>
+                <button class="btn btn-primary">
+                    <i class="fa-solid fa-print me-1"></i>
+                    Print Invoice
+                </button>
+            </div>
+        </div>
 
-        <div class="card-body">
+        <div class="invoice-card">
+            <div class="invoice-top">
+                <div>
+                    <div class="gym-logo">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3>Seba24 Fitness Club</h3>
+                    <p>Raipur Main Branch</p>
+                    <small>Shankar Nagar, Raipur</small>
+                </div>
 
-            <div class="d-flex justify-content-between align-items-start mb-4">
+                <div class="invoice-meta">
+                    <h2>INVOICE</h2>
+                    <strong>INV-001</strong>
+                    <span>Date: 07 Aug 2026</span>
+                    <span>Due Date: 07 Aug 2026</span>
+                    <span class="status paid">PAID</span>
+                </div>
+            </div>
+
+            <div class="customer-section">
+                <div>
+                    <label>BILL TO</label>
+                    <h5>Rohan Active Member</h5>
+                    <p>Member Code: GYM-101</p>
+                    <p>Phone: 9111111111</p>
+                    <p>Email: rohan@gmail.com</p>
+                </div>
 
                 <div>
-                    <small class="text-muted">Invoice Number</small>
-                    <h3 class="mb-0">INV-000001</h3>
+                    <label>SUBSCRIPTION</label>
+                    <h5>Monthly Cardio + Weights</h5>
+                    <p>Start Date: 07 Aug 2026</p>
+                    <p>End Date: 06 Sep 2026</p>
+                    <p>Trainer: Rahul Trainer</p>
                 </div>
-
-                <span class="badge bg-warning text-dark fs-6">
-                    Partial
-                </span>
-
             </div>
-
-            <div class="row g-3">
-
-                <div class="col-md-3">
-                    <small class="text-muted">Member</small>
-                    <div class="fw-semibold">
-                        Arjun Rathore
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <small class="text-muted">Subscription</small>
-                    <div class="fw-semibold">
-                        SUB-000010
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <small class="text-muted">Invoice Date</small>
-                    <div class="fw-semibold">
-                        05 Aug 2026
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <small class="text-muted">Due Date</small>
-                    <div class="fw-semibold">
-                        05 Sep 2026
-                    </div>
-                </div>
-
-            </div>
-
-            <hr>
-
-            <div class="row g-3">
-
-                <div class="col-md-2">
-                    <div class="amount-box">
-                        <small class="text-muted">Total</small>
-                        <h5>₹12,000</h5>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="amount-box">
-                        <small class="text-muted">Discount</small>
-                        <h5>₹1,000</h5>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="amount-box">
-                        <small class="text-muted">Tax</small>
-                        <h5>₹0</h5>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="amount-box">
-                        <small class="text-muted">Net Amount</small>
-                        <h5>₹11,000</h5>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="amount-box">
-                        <small class="text-muted">Paid</small>
-                        <h5 class="text-success">
-                            ₹4,000
-                        </h5>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="amount-box">
-                        <small class="text-muted">Due</small>
-                        <h5 class="text-danger">
-                            ₹7,000
-                        </h5>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Payment History -->
-
-    <div class="card main-card shadow-sm">
-
-        <div class="card-header bg-white py-3">
-            <h5 class="mb-0">
-                Payment & Receipt History
-            </h5>
-        </div>
-
-        <div class="card-body">
 
             <div class="table-responsive">
-
-                <table class="table table-hover align-middle">
-
-                    <thead class="table-light">
-                    <tr>
-                        <th>Receipt No.</th>
-                        <th>Payment Date</th>
-                        <th>Payment Mode</th>
-                        <th>Transaction Reference</th>
-                        <th>Received By</th>
-                        <th>Notes</th>
-                        <th class="text-end">Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
+                <table class="table invoice-items">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                        </tr>
                     </thead>
-
                     <tbody>
-
-                    <tr>
-                        <td>
-                            <strong>RCP-000001</strong>
-                        </td>
-
-                        <td>05 Aug 2026</td>
-
-                        <td>
-                            <span class="badge bg-light text-dark">
-                                UPI
-                            </span>
-                        </td>
-
-                        <td>UPI123456789</td>
-
-                        <td>Admin User</td>
-
-                        <td>First partial payment</td>
-
-                        <td class="text-end">
-                            ₹4,000.00
-                        </td>
-
-                        <td>
-                            <span class="badge bg-success">
-                                Success
-                            </span>
-                        </td>
-
-                        <td>
-                            <a href="payment-receipt.php"
-                               class="btn btn-sm btn-outline-primary">
-                                Receipt
-                            </a>
-                        </td>
-
-                    </tr>
-
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <strong>Monthly Cardio + Weights</strong>
+                                <small>Gym membership subscription</small>
+                            </td>
+                            <td>1</td>
+                            <td>₹1,500.00</td>
+                            <td>₹1,500.00</td>
+                        </tr>
                     </tbody>
-
                 </table>
-
             </div>
 
+            <div class="invoice-bottom">
+                <div class="payment-info">
+                    <h6>Payment Information</h6>
+                    <p><strong>Payment Mode:</strong> Cash</p>
+                    <p><strong>Receipt No:</strong> RCP-000001</p>
+                    <p><strong>Payment Date:</strong> 07 Aug 2026</p>
+                    <p><strong>Status:</strong> <span class="text-success">Success</span></p>
+                </div>
+
+                <div class="amount-summary">
+                    <div>
+                        <span>Total Amount</span>
+                        <strong>₹1,500.00</strong>
+                    </div>
+                    <div>
+                        <span>Discount</span>
+                        <strong>₹0.00</strong>
+                    </div>
+                    <div>
+                        <span>Tax</span>
+                        <strong>₹0.00</strong>
+                    </div>
+                    <div class="total-row">
+                        <span>Net Amount</span>
+                        <strong>₹1,500.00</strong>
+                    </div>
+                    <div>
+                        <span>Paid Amount</span>
+                        <strong class="text-success">₹1,500.00</strong>
+                    </div>
+                    <div class="due-row">
+                        <span>Due Amount</span>
+                        <strong>₹0.00</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="invoice-footer">
+                <strong>Thank you for choosing Seba24 Fitness Club.</strong>
+                <span>This is a computer-generated invoice.</span>
+            </div>
         </div>
-
     </div>
-
 </div>
 
-</body>
-</html>
+<style>
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:15px}
+.page-header h2{margin:0;font-size:24px;font-weight:700}
+.page-header p{margin:5px 0 0;color:#6b7280}
+.header-buttons{display:flex;gap:8px}
+.invoice-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:35px}
+.invoice-top{display:flex;justify-content:space-between;padding-bottom:30px;border-bottom:1px solid #e5e7eb}
+.gym-logo{width:48px;height:48px;background:#2563eb;color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px}
+.invoice-top h3{margin:0;font-size:20px}
+.invoice-top p{margin:5px 0;color:#374151;font-size:13px}
+.invoice-top small{color:#6b7280}
+.invoice-meta{text-align:right}
+.invoice-meta h2{font-size:26px;margin:0 0 5px}
+.invoice-meta strong{display:block;font-size:14px}
+.invoice-meta span{display:block;font-size:11px;color:#6b7280;margin-top:5px}
+.invoice-meta .status{display:inline-block;margin-top:10px;background:#dcfce7;color:#15803d}
+.customer-section{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:25px 0}
+.customer-section label{font-size:10px;font-weight:700;color:#9ca3af}
+.customer-section h5{font-size:14px;margin:7px 0}
+.customer-section p{font-size:11px;color:#6b7280;margin:4px 0}
+.invoice-items th{background:#f8fafc;font-size:11px;color:#6b7280}
+.invoice-items td{font-size:12px}
+.invoice-items td small{display:block;color:#6b7280;font-size:10px;margin-top:3px}
+.invoice-bottom{display:grid;grid-template-columns:1fr 350px;gap:40px;padding-top:30px}
+.payment-info h6{font-size:13px;margin-bottom:15px}
+.payment-info p{font-size:11px;color:#6b7280;margin:7px 0}
+.amount-summary>div{display:flex;justify-content:space-between;padding:8px 0;font-size:12px}
+.amount-summary .total-row{border-top:1px solid #e5e7eb;margin-top:5px;padding-top:12px;font-weight:700}
+.amount-summary .due-row{color:#dc2626;font-weight:700}
+.invoice-footer{text-align:center;border-top:1px solid #e5e7eb;margin-top:30px;padding-top:20px}
+.invoice-footer strong{display:block;font-size:12px}
+.invoice-footer span{display:block;font-size:10px;color:#9ca3af;margin-top:5px}
+@media(max-width:768px){.page-header,.invoice-top{flex-direction:column;align-items:flex-start}.invoice-meta{text-align:left;margin-top:20px}.customer-section,.invoice-bottom{grid-template-columns:1fr}.invoice-card{padding:20px}}
+@media print{.sidebar,.topbar,.page-header{display:none!important}.main-content{margin-left:0!important}.invoice-card{box-shadow:none}}
+</style>
+
+<?php include '../includes/footer.php'; ?>
